@@ -11,31 +11,33 @@ export default class App extends Component {
       todoItems: [
         {
           value: 'Закончить модуль',
-          isDone: true,
+          isDone: false,
           id: 1,
           showIcon: false
         },
         {
           value: 'Заплатить по счетам',
-          isDone: true,
+          isDone: false,
           id: 2,
           showIcon: false
         },
         {
           value: 'Навести порядок',
-          isDone: true,
+          isDone: false,
           id: 3,
           showIcon: false
         }]
     }
+    this.maxId = 4;
     this.countNotCompleted = this.countNotCompleted.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onClickDone = this.onClickDone.bind(this);
     this.onClickDelete = this.onClickDelete.bind(this);
+    this.onClickAdd = this.onClickAdd.bind(this);
   }
 
   countNotCompleted() {
-    const notCompleted = this.state.todoItems.filter(item => item.isDone);
+    const notCompleted = this.state.todoItems.filter(item => !item.isDone);
     return notCompleted.length;
   }
 
@@ -74,13 +76,28 @@ export default class App extends Component {
     })
   }
 
+  onClickAdd(value) {
+    const newItem = {
+      value: value,
+      id: this.maxId++,
+      isDone: false,
+      showIcon: false
+    }
+    this.setState(({todoItems}) => {
+      const newArr = [...todoItems, newItem];
+      return {
+        todoItems: newArr
+      }
+    })
+  }
+
   render() {
     const count = this.countNotCompleted();
     return (
       <div className={styles.wrap}>
         <div>
           <h1 className={styles.title}>Things to do</h1>
-          <InputItem/>
+          <InputItem addItem={this.onClickAdd}/>
           <ItemList todoItems={this.state.todoItems}
                     itemHover={this.onMouseOver}
                     onClickDone={this.onClickDone}
