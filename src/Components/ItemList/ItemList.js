@@ -27,6 +27,7 @@ const ItemList = ({todoItems, itemHover, onClickDone, onClickDelete}) => {
       </div>
     )
   });
+
   return (
   <ul className={styles.list}>
     {element}
