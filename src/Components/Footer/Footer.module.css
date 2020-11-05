@@ -1,0 +1,10 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.count {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}

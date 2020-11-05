@@ -1,0 +1,16 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nodelete {
+  visibility: hidden;
+}
+
+.delete {
+  visibility: visible;
+}
+
+.list {
+  padding: 0;
+}
