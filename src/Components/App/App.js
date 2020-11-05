@@ -31,6 +31,7 @@ export default class App extends Component {
     this.countNotCompleted = this.countNotCompleted.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onClickDone = this.onClickDone.bind(this);
+    this.onClickDelete = this.onClickDelete.bind(this);
   }
 
   countNotCompleted() {
@@ -63,6 +64,16 @@ export default class App extends Component {
     });
   }
 
+  onClickDelete(id) {
+    this.setState(({todoItems}) => {
+      const index = todoItems.findIndex(elem => elem.id === id);
+      const newArr = [...todoItems.slice(0, index), ...todoItems.slice(index + 1)];
+      return {
+        todoItems: newArr
+      }
+    })
+  }
+
   render() {
     const count = this.countNotCompleted();
     return (
@@ -72,7 +83,9 @@ export default class App extends Component {
           <InputItem/>
           <ItemList todoItems={this.state.todoItems}
                     itemHover={this.onMouseOver}
-                    onClickDone={this.onClickDone}/>
+                    onClickDone={this.onClickDone}
+                    onClickDelete={this.onClickDelete}
+          />
           <Footer count={count}/>
         </div>
       </div>
