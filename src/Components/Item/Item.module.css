@@ -1,0 +1,15 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  font-family: "Arial Black", sans-serif;
+  list-style-type: none;
+}
+
+.done {
+  text-decoration: line-through #000;
+  color: #c4c4c4;
+}

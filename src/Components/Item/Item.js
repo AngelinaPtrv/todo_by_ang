@@ -1,10 +1,24 @@
 import React from 'react';
+import classnames from 'classnames';
+import styles from './Item.module.css';
+import Checkbox from '@material-ui/core/Checkbox';
 
-const Item = ({value}) => {
+const Item = ({id, value, isDone, onClickDone}) => {
   return (
-    <div>
-      <li>{value}</li>
-    </div>
+      <div className={styles.wrap}>
+        <li className={
+          classnames({
+          [styles.item]:true,
+          [styles.done]:!isDone})
+        }>
+          <Checkbox
+            color="primary"
+            inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+            onClick={()=>onClickDone(id)}
+          />
+          {value}
+        </li>
+      </div>
   )
 };
 
