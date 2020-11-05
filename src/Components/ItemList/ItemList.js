@@ -4,13 +4,13 @@ import styles from "./ItemList.module.css";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
-const ItemList = ({todoItems, itemHover, onClickDone}) => {
+const ItemList = ({todoItems, itemHover, onClickDone, onClickDelete}) => {
   let element = todoItems.map(item => {
     const {id, showIcon,  ...itemProps} = item;
     return (
       <div key={id}
-           onMouseEnter={()=> itemHover(id)}
-           onMouseLeave={() => itemHover(id)}
+           onMouseOver={()=> itemHover(id)}
+           onMouseOut={() => itemHover(id)}
            className={styles.wrap}>
         <Item
           id={id}
@@ -18,9 +18,12 @@ const ItemList = ({todoItems, itemHover, onClickDone}) => {
           isDone={itemProps.isDone}
           onClickDone={onClickDone}
         />
-        <IconButton className={showIcon ? styles.delete : styles.nodelete}>
-          <DeleteOutlinedIcon/>
-        </IconButton>
+        <div className={showIcon ? styles.delete : styles.nodelete}>
+          <IconButton
+            onClick={()=>onClickDelete(id)}>
+            <DeleteOutlinedIcon/>
+          </IconButton>
+        </div>
       </div>
     )
   });
