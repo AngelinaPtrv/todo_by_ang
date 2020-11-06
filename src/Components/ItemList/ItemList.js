@@ -3,6 +3,7 @@ import Item from "../Item/Item";
 import styles from "./ItemList.module.css";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import PropTypes from 'prop-types';
 
 const ItemList = ({todoItems, itemHover, onClickDone, onClickDelete}) => {
   let element = todoItems.map(item => {
@@ -27,6 +28,13 @@ const ItemList = ({todoItems, itemHover, onClickDone, onClickDelete}) => {
       </div>
     )
   });
+
+  ItemList.prototype = {
+    todoItems: PropTypes.object.isRequired,
+    itemHover: PropTypes.func.isRequired,
+    onClickDone: PropTypes.func.isRequired,
+    onClickDelete: PropTypes.func.isRequired
+  }
 
   return (
   <ul className={styles.list}>

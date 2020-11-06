@@ -2,10 +2,12 @@ import React from 'react';
 import styles from './Footer.module.css';
 import Button from "@material-ui/core/Button";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import PropTypes from 'prop-types';
 
 const Footer = ({count}) => {
-  Footer.defaulProps = {
-    count: 0
+
+  Footer.prototype = {
+    count: PropTypes.number.isRequired
   }
 
   return (
@@ -22,6 +24,7 @@ const Footer = ({count}) => {
       <Button style={{fontSize: '9px', color: '#c4c4c4'}}>Clear completed</Button>
     </div>
   )
+
 };
 
 
