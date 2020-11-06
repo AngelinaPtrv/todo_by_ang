@@ -9,7 +9,7 @@ const Item = ({id, value, isDone, onClickDone}) => {
         <li className={
           classnames({
           [styles.item]:true,
-          [styles.done]:!isDone})
+          [styles.done]:isDone})
         }>
           <Checkbox
             color="primary"
