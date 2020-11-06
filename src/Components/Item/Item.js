@@ -1,23 +1,29 @@
-import React from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames';
 import styles from './Item.module.css';
 import Checkbox from '@material-ui/core/Checkbox';
-import PropTypes from 'prop-types';
 
-const Item = ({id, value, isDone, onClickDone}) => {
+export default class Item extends Component {
+  componentDidMount() {
+    console.log('componentDidMount()');
+  };
 
-  Item.prototype = {
-    value: PropTypes.string.isRequired,
-    isDone: PropTypes.bool.isRequired,
-    onClickDone: PropTypes.func.isRequired
+  componentDidUpdate() {
+    console.log('componentDidUpdate()');
   }
 
-  return (
+  componentWillUnmount() {
+    console.log('componentWillUnmount()');
+  }
+
+  render() {
+    const {id, value, isDone, onClickDone} = this.props;
+    return (
       <div className={styles.wrap}>
         <li className={
           classnames({
-          [styles.item]:true,
-          [styles.done]:isDone})
+            [styles.item]:true,
+            [styles.done]:isDone})
         }>
           <Checkbox
             color="primary"
@@ -27,7 +33,6 @@ const Item = ({id, value, isDone, onClickDone}) => {
           {value}
         </li>
       </div>
-  )
-};
-
-export default Item;
+    )
+  }
+}
