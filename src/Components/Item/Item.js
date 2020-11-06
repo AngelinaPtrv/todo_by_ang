@@ -4,6 +4,11 @@ import styles from './Item.module.css';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const Item = ({id, value, isDone, onClickDone}) => {
+
+  Item.defaultProps = {
+    isDone: false
+  }
+
   return (
       <div className={styles.wrap}>
         <li className={

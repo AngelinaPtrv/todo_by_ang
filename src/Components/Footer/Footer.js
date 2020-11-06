@@ -4,6 +4,10 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 const Footer = ({count}) => {
+  Footer.defaulProps = {
+    count: 0
+  }
+
   return (
     <div className={styles.wrap}>
       <div className={styles.count}>{count} items left</div>
@@ -19,5 +23,6 @@ const Footer = ({count}) => {
     </div>
   )
 };
+
 
 export default Footer;
