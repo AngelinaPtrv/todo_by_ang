@@ -16,7 +16,7 @@ export default class InputItem extends Component {
 
   onValueChange(event) {
     this.setState({
-      value: event.target.value.toUpperCase()
+      value: event.target.value
       })
   }
 
