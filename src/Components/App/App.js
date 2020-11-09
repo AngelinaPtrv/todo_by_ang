@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import Footer from '../Footer/Footer';
 import InputItem from '../InputItem/InputItem';
 import ItemList from '../ItemList/ItemList';
 import styles from './App.module.css';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const App = () => {
+  const initialState = {
       todoItems: [
         {
           value: 'Закончить модуль',
@@ -26,86 +24,81 @@ export default class App extends Component {
           isDone: false,
           id: 3,
           showIcon: false
-        }]
-    }
-    this.maxId = 4;
-    this.countNotCompleted = this.countNotCompleted.bind(this);
-    this.onMouseOver = this.onMouseOver.bind(this);
-    this.onClickDone = this.onClickDone.bind(this);
-    this.onClickDelete = this.onClickDelete.bind(this);
-    this.onClickAdd = this.onClickAdd.bind(this);
-  }
+        }],
+    maxId: 4
+    };
+  const [todoItems, setTodoItems] = useState(initialState.todoItems);
+  const [maxId, setMaxId] = useState(initialState.maxId)
 
-  countNotCompleted() {
-    const notCompleted = this.state.todoItems.filter(item => !item.isDone);
+  const countNotCompleted = () => {
+    const notCompleted = todoItems.filter(item => !item.isDone);
     return notCompleted.length;
   }
 
-  findAndChangeElementById(id, changeItemFunction) {
-    this.setState(({todoItems}) => {
+  const count = countNotCompleted();
+
+  const findAndChangeElementById = (id, changeItemFunction) => {
       const index = todoItems.findIndex(elem => elem.id === id);
       const old = todoItems[index];
       const newItem = changeItemFunction(old);
       const newArr = [...todoItems.slice(0, index), newItem, ...todoItems.slice(index + 1)];
-      return {
-        todoItems: newArr
-      }
-    })
+      setTodoItems(newArr);
   }
 
-  onClickDone(id) {
-    this.findAndChangeElementById(id, (old) => {
+
+  const onClickDone = (id) => {
+    findAndChangeElementById(id, (old) => {
       return {...old, isDone: !old.isDone};
     });
   }
 
 
-  onMouseOver(id) {
-    this.findAndChangeElementById(id, (old) => {
+  const onMouseOver = (id) => {
+    findAndChangeElementById(id, (old) => {
       return {...old, showIcon: !old.showIcon};
     });
   }
 
-  onClickDelete(id) {
-    this.setState(({todoItems}) => {
+  const onClickDelete = (id) => {
       const index = todoItems.findIndex(elem => elem.id === id);
       const newArr = [...todoItems.slice(0, index), ...todoItems.slice(index + 1)];
-      return {
-        todoItems: newArr
-      }
-    })
+      setTodoItems(newArr);
   }
 
-  onClickAdd(value) {
+  const onClickAdd = (value) => {
     const newItem = {
       value: value,
-      id: this.maxId++,
+      id: maxId,
       isDone: false,
       showIcon: false
     }
-    this.setState(({todoItems}) => {
-      const newArr = [...todoItems, newItem];
-      return {
-        todoItems: newArr
-      }
-    })
+    const newArr = [...todoItems, newItem];
+    setTodoItems(newArr);
+    setMaxId((maxId) => ++maxId);
   }
 
-  render() {
-    const count = this.countNotCompleted();
+  useEffect(()=>{
+    console.log('mount');
+  },[initialState]);
+
+  useEffect(()=>{
+    console.log('update');
+  },[count]);
+
     return (
       <div className={styles.wrap}>
         <div>
           <h1 className={styles.title}>Things to do</h1>
-          <InputItem addItem={this.onClickAdd}/>
-          <ItemList todoItems={this.state.todoItems}
-                    itemHover={this.onMouseOver}
-                    onClickDone={this.onClickDone}
-                    onClickDelete={this.onClickDelete}
+          <InputItem addItem={onClickAdd}/>
+          <ItemList todoItems={todoItems}
+                    itemHover={onMouseOver}
+                    onClickDone={onClickDone}
+                    onClickDelete={onClickDelete}
           />
           <Footer count={count}/>
         </div>
       </div>
     )
-  }
 }
+
+export default App;
