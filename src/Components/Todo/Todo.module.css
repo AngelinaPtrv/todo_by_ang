@@ -1,0 +1,11 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.title {
+  font-family: "Arial Black", sans-serif;
+  text-align: center;
+}
