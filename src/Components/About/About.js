@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from "./About.module.css";
 
-const name = 'ljhjklkjg';
+const name = 'AngelinaPtrv';
 const URL = 'https://api.github.com/users/' + name;
 
 export default class About extends Component {
@@ -32,7 +32,12 @@ export default class About extends Component {
           repoUrl: json.repos_url,
           fetchRequest: true
         })
-    });
+    }).catch(() => {
+          this.setState({
+            loadFailure: true,
+            isLoading: false})
+          console.clear();
+        });
 
       await fetch(this.state.repoUrl)
       .then(resolve => resolve.json())
@@ -43,12 +48,12 @@ export default class About extends Component {
           isLoading: false
         })
       }).catch(() => {
-          console.log(this.state.isLoading);
           this.setState({
             loadFailure: true,
             isLoading: false})
       });
       };
+    func();
   }
 
   render() {
