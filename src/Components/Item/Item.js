@@ -4,16 +4,6 @@ import styles from './Item.module.css';
 import Checkbox from '@material-ui/core/Checkbox';
 
 export default class Item extends Component {
-
-  componentDidMount() {
-    this.timerId = setInterval(()=>console.log('interval'), 1000);
-  };
-
-  componentWillUnmount() {
-    clearInterval(this.timerId);
-  }
-
-
   render() {
     const {id, value, isDone, onClickDone} = this.props;
     return (
