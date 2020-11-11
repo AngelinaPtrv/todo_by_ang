@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from "./About.module.css";
 
-const name = 'kjghfjg';
+const name = 'ljhjklkjg';
 const URL = 'https://api.github.com/users/' + name;
 
 export default class About extends Component {
@@ -14,7 +14,7 @@ export default class About extends Component {
     isLoading: true,
     repoUrl: '',
     repoList: [],
-    fetchRequest: true,
+    fetchRequest: false,
     loadFailure: false
   }
 
@@ -22,15 +22,15 @@ export default class About extends Component {
     let func = async () => {
       await fetch(URL)
       .then(resolve => resolve.ok
-        ? resolve.json()
-        : Promise.reject())
+      ? resolve.json()
+      : Promise.reject())
       .then((json) => {
         this.setState({
           name: json.name,
           bio: json.bio,
           email: json.email,
           repoUrl: json.repos_url,
-          fetchRequest: false
+          fetchRequest: true
         })
     });
 
@@ -42,9 +42,13 @@ export default class About extends Component {
           repoList: arrName,
           isLoading: false
         })
-      })
+      }).catch(() => {
+          console.log(this.state.isLoading);
+          this.setState({
+            loadFailure: true,
+            isLoading: false})
+      });
       };
-    func().catch(() => this.setState({loadFailure: true, isLoading: false}));
   }
 
   render() {
@@ -52,9 +56,9 @@ export default class About extends Component {
     const {isLoading, repoList, name, bio, email, fetchRequest, loadFailure} = this.state;
     return (
       <div className={styles.wrap}>
-        <h1>{isLoading ? <CircularProgress/> : 'About me'}</h1>
+        <h1 className={styles.title}>{isLoading ? <CircularProgress /> : 'About me'}</h1>
         <div>
-          {!fetchRequest ?
+          {fetchRequest ?
             <ul>
               {name && <li>{name}</li>}
               {bio && <li>{bio}</li>}
@@ -64,7 +68,7 @@ export default class About extends Component {
         </div>
         {(!isLoading && !loadFailure)
           ? <div>
-              <h1>My repos</h1>
+              <h1 className={styles.title}>My repos</h1>
                 <ol>
                   {repoList.map((repo, index) => (
                   <li key={index}>
