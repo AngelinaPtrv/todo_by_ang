@@ -1,0 +1,24 @@
+@font-face {
+  font-family: Merriweather-Regular;
+  src: url("./Merriweather-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: Merriweather-Light;
+  src: url("./Merriweather-Light.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: Merriweather-Bold;
+  src: url("./Merriweather-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: Merriweather-Black;
+  src: url("./Merriweather-Black.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: Merriweather-Italic;
+  src: url("./Merriweather-Italic.ttf") format("ttf");
+}

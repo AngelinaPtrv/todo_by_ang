@@ -18,7 +18,7 @@ const App = () => {
    <Router>
      <div className={styles.wrap}>
        <Card>
-       <List>
+       <List className={styles.links}>
          <Link to='/' className={styles.link}>
            <ListItem button>
              <ListItemText primary='About'/>
@@ -36,7 +36,7 @@ const App = () => {
          </Link>
        </List>
       </Card>
-       <Card>
+       <Card className={styles.card}>
          <Route path='/' exact component={About}/>
          <Route path='/todo' component={Todo}/>
          <Route path='/contacts' component={Contacts}/>

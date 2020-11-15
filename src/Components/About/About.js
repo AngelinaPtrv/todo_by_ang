@@ -1,88 +1,80 @@
 import React, {Component} from "react";
 
+import RepoList from "../RepoList/RepoList";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Card from '@material-ui/core/Card';
+import {CardContent} from "@material-ui/core";
+
 import styles from "./About.module.css";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
+import {keys} from "@material-ui/core/styles/createBreakpoints";
 
 const name = 'AngelinaPtrv';
 const URL = 'https://api.github.com/users/' + name;
 
 export default class About extends Component {
   state = {
+    avatar: '',
     name: '',
     bio: '',
-    email: '',
+    profile: '',
     isLoading: true,
-    repoUrl: '',
-    repoList: [],
+    reposUrl: '',
     fetchRequest: false,
-    loadFailure: false
+    loadFailure: false,
+    works: {
+      axion: 'https://webheroschool.github.io/Axion.githab.io/',
+      game: 'https://gamefindbugang-git-gamefindbug.whs123.vercel.app/'
+    }
   }
 
   componentDidMount() {
-    let func = async () => {
-      await fetch(URL)
-      .then(resolve => resolve.ok
-      ? resolve.json()
-      : Promise.reject())
-      .then((json) => {
-        this.setState({
-          name: json.name,
-          bio: json.bio,
-          email: json.email,
-          repoUrl: json.repos_url,
-          fetchRequest: true
-        })
-    }).catch(() => {
+    fetch(URL)
+        .then(resolve => resolve.ok
+          ? resolve.json()
+          : Promise.reject())
+        .then((json) => {
+          this.setState({
+            avatar: json.avatar_url,
+            name: json.name,
+            bio: json.bio,
+            profile: json.html_url,
+            reposUrl: json.repos_url,
+            fetchRequest: true,
+            isLoading: false
+          });
+        }).catch(() => {
           this.setState({
             loadFailure: true,
-            isLoading: false})
+            isLoading: false
+          })
           console.clear();
         });
-
-      await fetch(this.state.repoUrl)
-      .then(resolve => resolve.json())
-      .then((json) => {
-        let arrName = json.map(elem => elem.name);
-        this.setState({
-          repoList: arrName,
-          isLoading: false
-        })
-      }).catch(() => {
-          this.setState({
-            loadFailure: true,
-            isLoading: false})
-      });
-      };
-    func();
   }
 
   render() {
-    const link = `https://github.com/`;
-    const {isLoading, repoList, name, bio, email, fetchRequest, loadFailure} = this.state;
+    const {avatar, name, bio, profile, reposUrl, works, isLoading, fetchRequest, loadFailure} = this.state;
     return (
       <div className={styles.wrap}>
-        <h1 className={styles.title}>{isLoading ? <CircularProgress /> : 'About me'}</h1>
+        {!isLoading && fetchRequest &&
         <div>
-          {fetchRequest ?
-            <ul>
-              {name && <li>{name}</li>}
-              {bio && <li>{bio}</li>}
-              {email && <li>{email}</li>}
-            </ul> :
-            'User not found'}
+          <Card className={styles.card}>
+            <img src={avatar} alt="avatar" className={styles.avatar}/>
+            <CardContent className={styles.descr}>
+              <div className={styles.name}>{name}</div>
+              <div className={styles.bio}>{bio}</div>
+              <a href={profile} className={styles.profile}>my profile</a>
+              <div>My projects</div>
+              <div>
+                {Object.keys(works).map(keyUrl => (
+                  <a href={works[keyUrl]} key={keyUrl} className={styles.project}>{keyUrl}</a>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+          <RepoList reposUrl={reposUrl}/>
         </div>
-        {(!isLoading && !loadFailure)
-          ? <div>
-              <h1 className={styles.title}>My repos</h1>
-                <ol>
-                  {repoList.map((repo, index) => (
-                  <li key={index}>
-                    <a href={`${link}${name}/${repo}`} className={styles.link}>{repo}</a>
-                  </li>
-                  ))}
-                </ol>
-            </div>
-          : <div>Repos no found</div>
         }
       </div>
     )
