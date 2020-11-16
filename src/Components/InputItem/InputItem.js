@@ -7,8 +7,7 @@ export default class InputItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      error: false
+      value: ''
     }
     this.onValueChange = this.onValueChange.bind(this);
     this.onClickAdd = this.onClickAdd.bind(this);
@@ -17,20 +16,17 @@ export default class InputItem extends Component {
   onValueChange(event) {
     this.setState({
       value: event.target.value
-      })
+    });
+    this.props.clearError();
   }
+
 
   onClickAdd() {
     if (this.state.value) {
-      this.setState({
-        value: '',
-        error: false
-      });
-      this.props.addItem(this.state.value);
+      if(this.props.addItem(this.state.value))
+        this.setState({value: ''});
     } else {
-      this.setState({
-        error: true
-      })
+      this.props.onError('Field is empty!');
     }
   }
 
@@ -39,7 +35,7 @@ export default class InputItem extends Component {
       <div
         className={styles.wrap}>
         <TextField
-          error={this.state.error}
+          error={this.props.error.hasError}
           id="standard-basic"
           label="Enter task"
           fullWidth
