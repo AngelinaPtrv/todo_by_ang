@@ -31,6 +31,10 @@ const Todo = () => {
   };
   const [todoItems, setTodoItems] = useState(initialState.todoItems);
   const [maxId, setMaxId] = useState(initialState.maxId)
+  const [error,setError] = useState({
+    hasError: false,
+    errorText: ''
+  });
 
   const countNotCompleted = () => {
     const notCompleted = todoItems.filter(item => !item.isDone);
@@ -47,6 +51,19 @@ const Todo = () => {
     setTodoItems(newArr);
   }
 
+  const onError = (text) => {
+    setError({
+      hasError: true,
+      errorText: text
+    })
+  };
+
+  const clearError = () => {
+    setError({
+      hasError: false,
+      errorText: ''
+    })
+  };
 
   const onClickDone = (id) => {
     findAndChangeElementById(id, (old) => {
@@ -54,6 +71,11 @@ const Todo = () => {
     });
   }
 
+  const onDoubleChange = (id, value) => {
+    findAndChangeElementById(id, (old) => {
+      return {...old, value: value}
+    })
+  }
 
   const onMouseOver = (id) => {
     findAndChangeElementById(id, (old) => {
@@ -74,20 +96,34 @@ const Todo = () => {
       isDone: false,
       showIcon: false
     }
+    const result = todoItems.find((item) => item.value === value);
+    if (result) {
+      onError('Already exists!');
+      return false;
+    }
     const newArr = [...todoItems, newItem];
     setTodoItems(newArr);
     setMaxId((maxId) => ++maxId);
+    return true;
   }
 
   return (
     <div className={styles.wrap}>
       <div>
         <h1 className={styles.title}>Things to do</h1>
-        <InputItem addItem={onClickAdd}/>
-        <ItemList todoItems={todoItems}
-                  itemHover={onMouseOver}
-                  onClickDone={onClickDone}
-                  onClickDelete={onClickDelete}
+        <InputItem
+          clearError={clearError}
+          error={error}
+          onError={onError}
+          addItem={onClickAdd}
+        />
+        {error.hasError && <div>{error.errorText}</div>}
+        <ItemList
+          todoItems={todoItems}
+          itemHover={onMouseOver}
+          onClickDone={onClickDone}
+          onClickDelete={onClickDelete}
+          onDoubleChange={onDoubleChange}
         />
         <Footer count={count}/>
       </div>
