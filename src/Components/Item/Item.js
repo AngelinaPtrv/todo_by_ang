@@ -10,7 +10,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const {id, value, isDone, onClickDone} = this.props;
+    const {id, value, isDone, onClickDone, showIcon} = this.props;
     return (
       <div className={styles.wrap}>
         <li className={
@@ -19,8 +19,14 @@ export default class Item extends Component {
             [styles.done]: isDone
           })
         }
-            onBlur={() => this.setState({editable: false})}
-            onDoubleClick={() => this.setState({editable: true})}>
+            onBlur={() => {
+              this.setState({editable: false});
+              console.log('blur ' + showIcon)
+            }}
+            onDoubleClick={() => {
+              this.setState({editable: true});
+              console.log(showIcon);
+            }}>
           <Checkbox
             color="primary"
             inputProps={{'aria-label': 'uncontrolled-checkbox'}}

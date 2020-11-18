@@ -3,12 +3,12 @@
   justify-content: space-between;
 }
 
-.nodelete {
-  visibility: hidden;
+.invisible {
+  display: none;
 }
 
-.delete {
-  visibility: visible;
+.visible {
+  display: inline-flex;
 }
 
 .list {

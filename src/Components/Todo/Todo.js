@@ -13,19 +13,22 @@ const Todo = () => {
         value: 'Закончить модуль',
         isDone: false,
         id: 1,
-        showIcon: false
+        showIcon: false,
+        visible: true
       },
       {
         value: 'Заплатить по счетам',
         isDone: false,
         id: 2,
-        showIcon: false
+        showIcon: false,
+        visible: true
       },
       {
         value: 'Навести порядок',
         isDone: false,
         id: 3,
-        showIcon: false
+        showIcon: false,
+        visible: true
       }],
     maxId: 4
   };
@@ -94,7 +97,8 @@ const Todo = () => {
       value: value,
       id: maxId,
       isDone: false,
-      showIcon: false
+      showIcon: false,
+      visible: true
     }
     const result = todoItems.find((item) => item.value === value);
     if (result) {
@@ -105,6 +109,39 @@ const Todo = () => {
     setTodoItems(newArr);
     setMaxId((maxId) => ++maxId);
     return true;
+  }
+
+  const toShowCompleted = () => {
+    const arrCompleted = todoItems.map(item => {
+      !item.isDone ?
+        item.visible = false :
+        item.visible = true
+      return item;
+    })
+    setTodoItems(arrCompleted);
+  }
+
+  const toShowActive = () => {
+    const arrCompleted = todoItems.map(item => {
+      item.isDone ?
+        item.visible = false :
+        item.visible = true
+      return item;
+    })
+    setTodoItems(arrCompleted);
+  }
+
+  const toShowAll = () => {
+    const arrCompleted = todoItems.map(item => {
+      item.visible = true;
+      return item;
+    })
+    setTodoItems(arrCompleted);
+  }
+
+  const toClearCompleted = () => {
+    const arrCompleted = todoItems.filter(item => !item.isDone);
+    setTodoItems(arrCompleted);
   }
 
   return (
@@ -125,7 +162,13 @@ const Todo = () => {
           onClickDelete={onClickDelete}
           onDoubleChange={onDoubleChange}
         />
-        <Footer count={count}/>
+        <Footer
+          count={count}
+          toShowAll={toShowAll}
+          toShowCompleted={toShowCompleted}
+          toShowActive={toShowActive}
+          toClearCompleted={toClearCompleted}
+        />
       </div>
     </div>
   )
