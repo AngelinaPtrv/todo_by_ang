@@ -18,9 +18,10 @@
 }
 
 .descr {
+  width: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .name {
@@ -45,3 +46,20 @@
   color: #000000;
   text-decoration: none;
 }
+
+.social {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+.btn {
+  background-color: #fff;
+  border: none;
+}
+
+.mail {
+  color: #a4a4a4;
+  padding-right: 5px;
+}
+
