@@ -4,6 +4,8 @@ import RepoList from "../RepoList/RepoList";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Card from '@material-ui/core/Card';
 import {CardContent} from "@material-ui/core";
+import GitHub from "../Icons/GitHub";
+import Telegram from "../Icons/Telegram";
 
 import styles from "./About.module.css";
 import Typography from "@material-ui/core/Typography";
@@ -27,7 +29,7 @@ export default class About extends Component {
       axion: 'https://webheroschool.github.io/Axion.githab.io/',
       game: 'https://gamefindbugang-git-gamefindbug.whs123.vercel.app/'
     }
-  }
+  };
 
   componentDidMount() {
     fetch(URL)
@@ -62,14 +64,28 @@ export default class About extends Component {
           <Card className={styles.card}>
             <img src={avatar} alt="avatar" className={styles.avatar}/>
             <CardContent className={styles.descr}>
-              <div className={styles.name}>{name}</div>
-              <div className={styles.bio}>{bio}</div>
-              <a href={profile} className={styles.profile}>my profile</a>
-              <div>My projects</div>
-              <div>
-                {Object.keys(works).map(keyUrl => (
-                  <a href={works[keyUrl]} key={keyUrl} className={styles.project}>{keyUrl}</a>
-                ))}
+              <div className={styles.info}>
+                <div className={styles.name}>{name}</div>
+                <div className={styles.bio}>{bio}</div>
+                <div>My projects</div>
+                <div>
+                  {Object.keys(works).map(keyUrl => (
+                    <a href={works[keyUrl]} key={keyUrl} className={styles.project}>{keyUrl}</a>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.social}>
+                <div className={styles.mail}>angelshakirova@gmail.com</div>
+                <button className={styles.btn} onClick={() => {
+                  window.open(profile, '_blank');
+                }}>
+                  <GitHub/>
+                </button>
+                <button className={styles.btn} onClick={() => {
+                  window.open('https://t.me/Angelina_Ptrv', '_blank');
+                }}>
+                  <Telegram/>
+                </button>
               </div>
             </CardContent>
           </Card>
