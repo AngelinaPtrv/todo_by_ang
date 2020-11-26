@@ -30,6 +30,7 @@
 }
 
 .bio {
+  color: #a4a4a4;
   font-family: 'Merriweather-Light', 'Arial', serif;
   font-size: 15px;
 }
@@ -45,6 +46,11 @@
   font-family: 'Merriweather-Light', 'Arial', serif;
   color: #000000;
   text-decoration: none;
+}
+
+.projects {
+  font-family: 'Merriweather-Black', 'Arial Black', serif;
+  margin-top: 7px;
 }
 
 .social {

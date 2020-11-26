@@ -4,31 +4,36 @@ import styles from "./ItemList.module.css";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
-class ItemList extends Component {
+export default class ItemList extends Component {
   onChangeValue = (id, value) => {
     this.props.onDoubleChange(id, value);
   }
 
+  componentDidMount() {
+    this.props.toChangeState();
+  }
+
   render() {
+    const {itemHover, onClickDone, onClickDelete} = this.props;
     let element = this.props.todoItems.map(item => {
-      const {id, showIcon,  visible, ...itemProps} = item;
+      const {id, showIcon,  visible, value, isDone, ...itemProps} = item;
       return (
         <div key={id}
-             onMouseOver={()=> this.props.itemHover(id)}
-             onMouseOut={() => this.props.itemHover(id)}
+             onMouseOver={()=> itemHover(id)}
+             onMouseOut={() => itemHover(id)}
              className={visible ? styles.wrap : styles.invisible}
         >
           <Item
             id={id}
-            value={itemProps.value}
-            isDone={itemProps.isDone}
+            value={value}
+            isDone={isDone}
             showIcon={showIcon}
-            onClickDone={this.props.onClickDone}
+            onClickDone={onClickDone}
             setFieldValue={this.onChangeValue}
           />
           <div className={showIcon ? styles.visible : styles.invisible}>
             <IconButton
-              onClick={()=>this.props.onClickDelete(id)}>
+              onClick={()=> onClickDelete(id)}>
               <DeleteOutlinedIcon/>
             </IconButton>
           </div>
@@ -42,5 +47,3 @@ class ItemList extends Component {
     )
   }
 }
-
-export default ItemList;
