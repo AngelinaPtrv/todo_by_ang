@@ -1,16 +1,12 @@
 import React, {Component} from "react";
 
 import RepoList from "../RepoList/RepoList";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Card from '@material-ui/core/Card';
 import {CardContent} from "@material-ui/core";
 import GitHub from "../Icons/GitHub";
 import Telegram from "../Icons/Telegram";
 
 import styles from "./About.module.css";
-import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
-import {keys} from "@material-ui/core/styles/createBreakpoints";
 
 const name = 'AngelinaPtrv';
 const URL = 'https://api.github.com/users/' + name;
@@ -26,7 +22,7 @@ export default class About extends Component {
     fetchRequest: false,
     loadFailure: false,
     works: {
-      axion: 'https://webheroschool.github.io/Axion.githab.io/',
+      'site layout': 'https://webheroschool.github.io/Axion.githab.io/',
       game: 'https://gamefindbugang-git-gamefindbug.whs123.vercel.app/'
     }
   };
@@ -56,7 +52,7 @@ export default class About extends Component {
   }
 
   render() {
-    const {avatar, name, bio, profile, reposUrl, works, isLoading, fetchRequest, loadFailure} = this.state;
+    const {avatar, name, bio, profile, reposUrl, works, isLoading, fetchRequest} = this.state;
     return (
       <div className={styles.wrap}>
         {!isLoading && fetchRequest &&
@@ -67,10 +63,13 @@ export default class About extends Component {
               <div className={styles.info}>
                 <div className={styles.name}>{name}</div>
                 <div className={styles.bio}>{bio}</div>
-                <div>My projects</div>
+                <div className={styles.projects}>My projects</div>
                 <div>
                   {Object.keys(works).map(keyUrl => (
-                    <a href={works[keyUrl]} key={keyUrl} className={styles.project}>{keyUrl}</a>
+                    <a
+                      href={works[keyUrl]}
+                      key={keyUrl}
+                      className={styles.project}>{keyUrl}</a>
                   ))}
                 </div>
               </div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Card from '@material-ui/core/Card';
+import Pagination from "@material-ui/lab/Pagination";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from './RepoList.module.css';
@@ -58,19 +59,27 @@ export default class RepoList extends Component {
   }
 
   render() {
+    const {isLoading, fetchRequest, repos} = this.state;
     return (
-      <Card className={styles.wrap}>
-        {!this.state.isLoading && this.state.fetchRequest &&
-        this.state.repos.map((repo) => (
-          <div key={repo.id} className={styles.item}>
-            <StarBorderOutlined color="primary"/>
-            <div className={styles.repo}>
-              <a href={repo.repoUrl} className={styles.link}>{repo.name}</a>
-              <div className={styles.descr}>{repo.description}</div>
-              <div className={styles.lang}>{repo.technology}</div>
+      <Card>
+        {isLoading ?
+          <div className={styles.progress}>
+            <CircularProgress/>
+          </div> :
+          fetchRequest && repos.map((repo) => (
+            <div key={repo.id} className={styles.item}>
+              <StarBorderOutlined color="primary"/>
+              <div className={styles.repo}>
+                <a href={repo.repoUrl} className={styles.link}>{repo.name}</a>
+                <div className={styles.descr}>{repo.description}</div>
+                <div className={styles.lang}>{repo.technology}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
+        <Pagination
+          size="small"
+          className={styles.pagination}/>
       </Card>
     )
   }

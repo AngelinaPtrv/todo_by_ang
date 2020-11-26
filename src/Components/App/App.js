@@ -8,7 +8,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import Todo from "../Todo/Todo";
 import About from "../About/About";
-import Contacts from "../Contacts/Contacts";
 
 import styles from "./App.module.css";
 
@@ -29,17 +28,11 @@ const App = () => {
              <ListItemText primary='Todo'/>
            </ListItem>
          </Link>
-         <Link to='/contacts' className={styles.link}>
-           <ListItem button>
-             <ListItemText primary='Contacts'/>
-           </ListItem>
-         </Link>
        </List>
       </Card>
        <Card className={styles.card}>
          <Route path='/' exact component={About}/>
          <Route path='/todo' component={Todo}/>
-         <Route path='/contacts' component={Contacts}/>
        </Card>
      </div>
   </Router>

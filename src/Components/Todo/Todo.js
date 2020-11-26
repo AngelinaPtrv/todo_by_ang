@@ -32,6 +32,7 @@ const Todo = () => {
       }],
     maxId: 4
   };
+
   const [todoItems, setTodoItems] = useState(initialState.todoItems);
   const [maxId, setMaxId] = useState(initialState.maxId)
   const [error,setError] = useState({
@@ -107,6 +108,7 @@ const Todo = () => {
     }
     const newArr = [...todoItems, newItem];
     setTodoItems(newArr);
+    localStorage.setItem('items', JSON.stringify(newArr));
     setMaxId((maxId) => ++maxId);
     return true;
   }
@@ -144,6 +146,15 @@ const Todo = () => {
     setTodoItems(arrCompleted);
   }
 
+  const toChangeState = () => {
+    if (localStorage.getItem('items')) {
+      const newItemList = JSON.parse(localStorage.getItem('items'));
+      setTodoItems(newItemList);
+      const newId = newItemList.length + 1;
+      setMaxId(newId);
+    }
+  }
+
   return (
     <div className={styles.wrap}>
       <div>
@@ -161,6 +172,7 @@ const Todo = () => {
           onClickDone={onClickDone}
           onClickDelete={onClickDelete}
           onDoubleChange={onDoubleChange}
+          toChangeState={toChangeState}
         />
         <Footer
           count={count}

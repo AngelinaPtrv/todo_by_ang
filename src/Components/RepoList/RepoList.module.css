@@ -1,3 +1,7 @@
+.progress {
+  text-align: center;
+}
+
 .item {
   border: 1px solid #c4c4c4;
   border-radius: 5px;
@@ -18,4 +22,9 @@
 
 .descr, .lang {
   font-family: 'Merriweather-Light', 'Arial', serif;
+}
+
+.pagination {
+  margin: 0 auto 10px;
+  width: 100px;
 }
