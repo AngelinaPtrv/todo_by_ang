@@ -91,6 +91,7 @@ const Todo = () => {
     const index = todoItems.findIndex(elem => elem.id === id);
     const newArr = [...todoItems.slice(0, index), ...todoItems.slice(index + 1)];
     setTodoItems(newArr);
+    localStorage.setItem('items', JSON.stringify(newArr));
   }
 
   const onClickAdd = (value) => {
@@ -144,6 +145,7 @@ const Todo = () => {
   const toClearCompleted = () => {
     const arrCompleted = todoItems.filter(item => !item.isDone);
     setTodoItems(arrCompleted);
+    localStorage.setItem('items', JSON.stringify(arrCompleted));
   }
 
   const toChangeState = () => {

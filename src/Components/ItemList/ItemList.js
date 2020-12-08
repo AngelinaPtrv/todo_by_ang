@@ -16,10 +16,10 @@ export default class ItemList extends Component {
   render() {
     const {itemHover, onClickDone, onClickDelete} = this.props;
     let element = this.props.todoItems.map(item => {
-      const {id, showIcon,  visible, value, isDone, ...itemProps} = item;
+      const {id, showIcon,  visible, value, isDone} = item;
       return (
         <div key={id}
-             onMouseOver={()=> itemHover(id)}
+             onMouseOver={() => itemHover(id)}
              onMouseOut={() => itemHover(id)}
              className={visible ? styles.wrap : styles.invisible}
         >
@@ -30,6 +30,7 @@ export default class ItemList extends Component {
             showIcon={showIcon}
             onClickDone={onClickDone}
             setFieldValue={this.onChangeValue}
+            itemHover={itemHover}
           />
           <div className={showIcon ? styles.visible : styles.invisible}>
             <IconButton

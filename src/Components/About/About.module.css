@@ -41,16 +41,15 @@
   text-decoration: none;
 }
 
-.project {
-  display: block;
-  font-family: 'Merriweather-Light', 'Arial', serif;
-  color: #000000;
-  text-decoration: none;
-}
-
 .projects {
   font-family: 'Merriweather-Black', 'Arial Black', serif;
   margin-top: 7px;
+}
+
+.works {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .social {

@@ -2,6 +2,7 @@ import React, {Component} from "react";
 
 import RepoList from "../RepoList/RepoList";
 import Card from '@material-ui/core/Card';
+import Chip from '@material-ui/core/Chip';
 import {CardContent} from "@material-ui/core";
 import GitHub from "../Icons/GitHub";
 import Telegram from "../Icons/Telegram";
@@ -22,8 +23,8 @@ export default class About extends Component {
     fetchRequest: false,
     loadFailure: false,
     works: {
-      'site layout': 'https://webheroschool.github.io/Axion.githab.io/',
-      game: 'https://gamefindbugang-git-gamefindbug.whs123.vercel.app/'
+      Axion: 'https://webheroschool.github.io/Axion.github.io/',
+      'Find bug': 'https://gamefindbugang-git-gamefindbug.whs123.vercel.app/'
     }
   };
 
@@ -64,12 +65,16 @@ export default class About extends Component {
                 <div className={styles.name}>{name}</div>
                 <div className={styles.bio}>{bio}</div>
                 <div className={styles.projects}>My projects</div>
-                <div>
+                <div className={styles.works}>
                   {Object.keys(works).map(keyUrl => (
-                    <a
-                      href={works[keyUrl]}
+                    <Chip
+                      label={keyUrl}
+                      variant="outlined"
                       key={keyUrl}
-                      className={styles.project}>{keyUrl}</a>
+                      onClick={() => {
+                        window.open(works[keyUrl], '_blank')
+                      }}
+                    />
                   ))}
                 </div>
               </div>
