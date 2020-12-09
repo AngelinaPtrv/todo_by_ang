@@ -68,3 +68,10 @@
   padding-right: 5px;
 }
 
+.copyright {
+  font-family: 'Merriweather-Light', 'Arial', serif;
+  font-size: 14px;
+  color: #a4a4a4;
+  text-align: right;
+}
+

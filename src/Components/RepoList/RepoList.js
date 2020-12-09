@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import Card from '@material-ui/core/Card';
 import Pagination from "@material-ui/lab/Pagination";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {StarBorderOutlined} from "@material-ui/icons";
 
 import styles from './RepoList.module.css';
-import {StarBorderOutlined} from "@material-ui/icons";
 
 export default class RepoList extends Component {
   state =  {
