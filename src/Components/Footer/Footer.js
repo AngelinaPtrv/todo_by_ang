@@ -1,45 +1,40 @@
-import React from 'react';
-import styles from './Footer.module.css';
-import Button from "@material-ui/core/Button";
+import React, {Component} from 'react';
+
+import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import PropTypes from 'prop-types';
 
-const Footer = ({count, toShowAll, toShowActive, toShowCompleted, toClearCompleted}) => {
+import styles from './Footer.module.css';
 
-  Footer.prototype = {
-    count: PropTypes.number.isRequired
+export default class Footer extends Component {
+  render() {
+    const {count, toShowAll, toShowActive, toShowCompleted, toClearCompleted} = this.props;
+    return (
+      <div className={styles.wrap}>
+        <div className={styles.count}>{count} items left</div>
+        <ButtonGroup
+          size="small"
+          variant="text"
+          aria-label="text outlined button group">
+          <Button style={{fontSize: '9px', color: '#c4c4c4'}}
+                  onClick={() => toShowAll()}
+          >
+            All
+          </Button>
+          <Button style={{fontSize: '9px', color: '#c4c4c4'}}
+                  onClick={() => toShowActive()}
+          >
+            Active
+          </Button>
+          <Button style={{fontSize: '9px', color: '#c4c4c4'}}
+                  onClick={() => toShowCompleted()}
+          >
+            Completed
+          </Button>
+        </ButtonGroup>
+        <Button style={{fontSize: '9px', color: '#c4c4c4'}}
+                onClick={() => toClearCompleted()}
+        >Clear completed</Button>
+      </div>
+    )
   }
-
-  return (
-    <div className={styles.wrap}>
-      <div className={styles.count}>{count} items left</div>
-      <ButtonGroup
-        size="small"
-        variant="text"
-        aria-label="text outlined button group">
-        <Button style={{fontSize: '9px', color: '#c4c4c4'}}
-                onClick={() => toShowAll()}
-        >
-          All
-        </Button>
-        <Button style={{fontSize: '9px', color: '#c4c4c4'}}
-          onClick={() => toShowActive()}
-        >
-          Active
-        </Button>
-        <Button style={{fontSize: '9px', color: '#c4c4c4'}}
-          onClick = {() => toShowCompleted()}
-        >
-          Completed
-        </Button>
-      </ButtonGroup>
-      <Button style={{fontSize: '9px', color: '#c4c4c4'}}
-              onClick={() => toClearCompleted()}
-      >Clear completed</Button>
-    </div>
-  )
-
-};
-
-
-export default Footer;
+}

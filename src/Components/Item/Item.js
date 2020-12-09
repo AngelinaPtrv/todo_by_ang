@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+
+import Checkbox from '@material-ui/core/Checkbox';
+import TextField from '@material-ui/core/TextField';
+
 import classnames from 'classnames';
 import styles from './Item.module.css';
-import Checkbox from '@material-ui/core/Checkbox';
-import TextField from "@material-ui/core/TextField";
 
 export default class Item extends Component {
   state = {
@@ -10,7 +12,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const {id, value, isDone, onClickDone, showIcon, itemHover} = this.props;
+    const {id, value, isDone, onClickDone, itemHover} = this.props;
     return (
       <div className={styles.wrap}>
         <li className={
@@ -20,14 +22,11 @@ export default class Item extends Component {
           })
         }
             onBlur={() => {
-              itemHover(id);
               this.setState({editable: false});
-              console.log('blur ' + showIcon);
             }}
             onDoubleClick={() => {
               itemHover(id);
               this.setState({editable: true});
-              console.log('double click ' + showIcon);
             }}>
           <Checkbox
             color="primary"

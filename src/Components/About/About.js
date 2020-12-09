@@ -96,6 +96,7 @@ export default class About extends Component {
           <RepoList reposUrl={reposUrl}/>
         </div>
         }
+        <div className={styles.copyright}>Выполнено в Web Hero School</div>
       </div>
     )
   }
