@@ -28,3 +28,13 @@
   margin: 0 auto 10px;
   width: 100px;
 }
+
+.langs {
+  display: flex;
+}
+
+.lang {
+  font-family: 'Merriweather-Light', 'Arial', serif;
+  padding-right: 5px;
+  color: #a4a4a4;
+}

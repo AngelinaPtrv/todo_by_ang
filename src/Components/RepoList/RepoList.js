@@ -20,7 +20,8 @@ export default class RepoList extends Component {
       name: data.name,
       repoUrl: data.html_url,
       description: data.description,
-      technology: data.language,
+      language_url: data.languages_url,
+      lang: [],
       id: data.id
     }
      if (this.state.repos) {
@@ -31,7 +32,7 @@ export default class RepoList extends Component {
          }
        })
      } else {
-         this.setState((repos) => {
+         this.setState(() => {
            return {
              repos: newItem
            }
@@ -39,23 +40,43 @@ export default class RepoList extends Component {
      }
   }
 
+  addLang = (url, data) => {
+    const languages = [];
+    languages.push(Object.keys(data));
+    const index = this.state.repos.findIndex(item => item.language_url === url);
+    const old = this.state.repos[index];
+    const newItem = {...old, lang: languages};
+    const newRepos = [...this.state.repos.slice(0, index), newItem, ...this.state.repos.slice(index + 1)];
+    this.setState({
+        repos: newRepos
+    });
+  }
 
   componentDidMount() {
-    fetch(this.props.reposUrl)
-    .then(resolve => resolve.json())
-    .then((json) => {
-      json.map((elem) =>  {
-        this.addRepo(elem);
-      });
-      this.setState({
-        isLoading: false,
-        fetchRequest: true
-      })
-    }).catch(() => {
-        this.setState({
-          loadFailure: true,
-          isLoading: false})
-    });
+      fetch(this.props.reposUrl)
+        .then(resolve => resolve.json())
+        .then(json => {
+          this.setState({
+            isLoading: false,
+            fetchRequest: true
+          });
+          json.map(elem => this.addRepo(elem))
+        })
+            .then(() => {
+              this.state.repos.map(item => {
+                fetch(item.language_url)
+                  .then(resolve => resolve.json())
+                  .then(json => {
+                    this.addLang(item.language_url, json);
+                  })
+              })
+            })
+        .catch(() => {
+          this.setState({
+            loadFailure: true,
+            isLoading: false
+          })
+        })
   }
 
   render() {
@@ -72,7 +93,11 @@ export default class RepoList extends Component {
               <div className={styles.repo}>
                 <a href={repo.repoUrl} className={styles.link}>{repo.name}</a>
                 <div className={styles.descr}>{repo.description}</div>
-                <div className={styles.lang}>{repo.technology}</div>
+                <div className={styles.langs}>
+                  {repo.lang.map((item) =>
+                    item.map((item, index)=> (<div key={index} className={styles.lang}>{item}</div>))
+                  )}
+                </div>
               </div>
             </div>
           ))

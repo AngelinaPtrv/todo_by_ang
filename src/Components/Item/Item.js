@@ -10,7 +10,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const {id, value, isDone, onClickDone, showIcon} = this.props;
+    const {id, value, isDone, onClickDone, showIcon, itemHover} = this.props;
     return (
       <div className={styles.wrap}>
         <li className={
@@ -20,12 +20,14 @@ export default class Item extends Component {
           })
         }
             onBlur={() => {
+              itemHover(id);
               this.setState({editable: false});
-              console.log('blur ' + showIcon)
+              console.log('blur ' + showIcon);
             }}
             onDoubleClick={() => {
+              itemHover(id);
               this.setState({editable: true});
-              console.log(showIcon);
+              console.log('double click ' + showIcon);
             }}>
           <Checkbox
             color="primary"
