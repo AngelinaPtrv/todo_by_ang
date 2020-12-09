@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/WebHeroSchool/todo_by_ang/static/css/main.55c5208c.chunk.css",
-    "main.js": "/WebHeroSchool/todo_by_ang/static/js/main.6c7afb2a.chunk.js",
-    "main.js.map": "/WebHeroSchool/todo_by_ang/static/js/main.6c7afb2a.chunk.js.map",
-    "runtime-main.js": "/WebHeroSchool/todo_by_ang/static/js/runtime-main.a52ac921.js",
-    "runtime-main.js.map": "/WebHeroSchool/todo_by_ang/static/js/runtime-main.a52ac921.js.map",
-    "static/js/2.0d4e743c.chunk.js": "/WebHeroSchool/todo_by_ang/static/js/2.0d4e743c.chunk.js",
-    "static/js/2.0d4e743c.chunk.js.map": "/WebHeroSchool/todo_by_ang/static/js/2.0d4e743c.chunk.js.map",
-    "index.html": "/WebHeroSchool/todo_by_ang/index.html",
-    "static/css/main.55c5208c.chunk.css.map": "/WebHeroSchool/todo_by_ang/static/css/main.55c5208c.chunk.css.map",
-    "static/js/2.0d4e743c.chunk.js.LICENSE.txt": "/WebHeroSchool/todo_by_ang/static/js/2.0d4e743c.chunk.js.LICENSE.txt"
+    "main.css": "/todo_by_ang/static/css/main.55c5208c.chunk.css",
+    "main.js": "/todo_by_ang/static/js/main.6c7afb2a.chunk.js",
+    "main.js.map": "/todo_by_ang/static/js/main.6c7afb2a.chunk.js.map",
+    "runtime-main.js": "/todo_by_ang/static/js/runtime-main.6c6787cb.js",
+    "runtime-main.js.map": "/todo_by_ang/static/js/runtime-main.6c6787cb.js.map",
+    "static/js/2.0d4e743c.chunk.js": "/todo_by_ang/static/js/2.0d4e743c.chunk.js",
+    "static/js/2.0d4e743c.chunk.js.map": "/todo_by_ang/static/js/2.0d4e743c.chunk.js.map",
+    "index.html": "/todo_by_ang/index.html",
+    "static/css/main.55c5208c.chunk.css.map": "/todo_by_ang/static/css/main.55c5208c.chunk.css.map",
+    "static/js/2.0d4e743c.chunk.js.LICENSE.txt": "/todo_by_ang/static/js/2.0d4e743c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a52ac921.js",
+    "static/js/runtime-main.6c6787cb.js",
     "static/js/2.0d4e743c.chunk.js",
     "static/css/main.55c5208c.chunk.css",
     "static/js/main.6c7afb2a.chunk.js"
